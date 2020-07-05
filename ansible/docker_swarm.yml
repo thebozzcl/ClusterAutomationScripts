@@ -1,0 +1,50 @@
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install pip
+    apt:
+      pkg: python-pip
+  - name: Install docker Python library
+    apt:
+      pkg: python-docker
+- hosts: managers
+  vars:
+    swarm_port: 2377
+  tasks:
+  - name: Initialize Docker swarm
+    docker_swarm:
+      state: present
+      advertise_addr: '{{ inventory_hostname }}:{{ swarm_port }}'
+    register: swarm_info
+  - name: Get join-tokens
+    set_fact:
+      worker_token: '{{ swarm_info.swarm_facts.JoinTokens.Worker }}'
+      manager_token: '{{ swarm_info.swarm_facts.JoinTokens.Manager }}'
+  - name: Add labels
+    docker_node:
+      hostname: '{{ inventory_hostname }}'
+      labels:
+        gpu: 'no'
+        role: 'manager'
+      labels_state: replace
+- hosts: workers
+  vars:
+    swarm_port: 2377
+    worker_token: '{{ hostvars[groups["managers"][0]].worker_token }}'
+  tasks:
+  - name: Join Docker swarm
+    docker_swarm:
+      state: join
+      remote_addrs: [ '{{ groups["managers"][0] }}:{{ swarm_port }}' ]
+      join_token: '{{ worker_token }}'
+      advertise_addr: '{{ inventory_hostname }}:{{ swarm_port }}'
+- hosts: managers[0]
+  tasks:
+  - name: Add labels to workers
+    docker_node:
+      hostname: '{{ item }}'
+      labels:
+        gpu: 'yes'
+        role: 'worker'
+      labels_state: replace
+    loop: '{{ groups["workers"] }}'
