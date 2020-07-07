@@ -1,7 +1,0 @@
----
-- hosts: managers[0]
-  tasks:
-  - name: Create Docker network
-    docker_network:
-      driver: overlay
-      name: flink-network

@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  vars:
+    stack_name: flink
+    compose_url: ''
+    compose_dst: '/tmp/flink_docker-compose.yml'
+    compose_path: '/tmp/flink_scripts/compose/flink/docker_compose.yml'
+  tasks:
+  - name: Copy compose file
+  - name: Remove previous stack
+    docker_stack:
+      name: '{{ stack_name }}'
+      state: absent
+  - name: Start new stack
+    docker_stack:
+      name: '{{ stack_name }}'
+      state: present
+      compose:
+      - 
