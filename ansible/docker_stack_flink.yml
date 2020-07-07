@@ -1,10 +1,15 @@
 ---
-- hosts: localhost
+- hosts: managers[0]
   vars:
     stack_name: flink
     compose_url: 'https://raw.githubusercontent.com/thebozzcl/ClusterAutomationScripts/master/compose/flink/docker-compose.yml'
-    compose_dest: '/tmp/flink/docker-compose.yml'
+    compose_dest: '/tmp/flink_docker-compose.yml'
   tasks:
+  - name: Install dependencies
+    pip:
+      name:
+      - jsondiff
+      - pyyaml
   - name: Copy compose file
     get_url:
       url: '{{ compose_url }}'

@@ -1,7 +1,7 @@
 version: "3"
 services:
   jobmanager:
-    image: thebozzcl/flink:arm32v7-1.10-scala_2.11-8-jre
+    image: thebozzcl/flink:arm32v7-1.11-scala_2.12-8-jre
     deploy:
       replicas: 1
       placement:
@@ -16,7 +16,7 @@ services:
       - JOB_MANAGER_RPC_ADDRESS=jobmanager
 
   taskmanager:
-    image: thebozzcl/flink:arm64v8-1.10-scala_2.11-8-jre
+    image: thebozzcl/flink:arm64v8-1.11-scala_2.12-8-jre
     deploy:
       replicas: 4
       placement:
