@@ -1,3 +1,4 @@
+---
 - hosts: all
   become: yes
   tasks:
@@ -7,14 +8,15 @@
   - name: Install docker Python library
     apt:
       pkg: python-docker
-- hosts: managers
+- hosts: managers[0]
   vars:
     swarm_port: 2377
+    host_ip: '{{ hostvars[inventory_hostname].ansible_default_ipv4.address }}'
   tasks:
   - name: Initialize Docker swarm
     docker_swarm:
       state: present
-      advertise_addr: '{{ inventory_hostname }}:{{ swarm_port }}'
+      advertise_addr: '{{ host_ip }}:{{ swarm_port }}'
     register: swarm_info
   - name: Get join-tokens
     set_fact:
@@ -27,17 +29,18 @@
         gpu: 'no'
         role: 'manager'
       labels_state: replace
-- hosts: workers
+- hosts: all
   vars:
     swarm_port: 2377
     worker_token: '{{ hostvars[groups["managers"][0]].worker_token }}'
+    host_ip: '{{ hostvars[inventory_hostname].ansible_default_ipv4.address }}'
   tasks:
   - name: Join Docker swarm
     docker_swarm:
       state: join
       remote_addrs: [ '{{ groups["managers"][0] }}:{{ swarm_port }}' ]
       join_token: '{{ worker_token }}'
-      advertise_addr: '{{ inventory_hostname }}:{{ swarm_port }}'
+      advertise_addr: '{{ host_ip }}:{{ swarm_port }}'
 - hosts: managers[0]
   tasks:
   - name: Add labels to workers

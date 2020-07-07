@@ -1,0 +1,34 @@
+version: "3"
+services:
+  jobmanager:
+    image: thebozzcl/flink:arm32v7
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.labels.role==manager"
+    expose:
+      - "6123"
+    ports:
+      - "8081:8081"
+    command: jobmanager
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=jobmanager
+
+  taskmanager:
+    image: thebozzcl/flink:arm64v8
+    deploy:
+      replicas: 4
+      placement:
+        constraints:
+          - "node.labels.role==worker"
+    expose:
+      - "6121"
+      - "6122"
+    depends_on:
+      - jobmanager
+    command: taskmanager
+    links:
+      - "jobmanager:jobmanager"
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=jobmanager
