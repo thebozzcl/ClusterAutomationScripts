@@ -2,11 +2,13 @@
 - hosts: localhost
   vars:
     stack_name: flink
-    compose_url: ''
-    compose_dst: '/tmp/flink_docker-compose.yml'
-    compose_path: '/tmp/flink_scripts/compose/flink/docker_compose.yml'
+    compose_url: 'https://raw.githubusercontent.com/thebozzcl/ClusterAutomationScripts/master/compose/flink/docker-compose.yml'
+    compose_dest: '/tmp/flink/docker-compose.yml'
   tasks:
   - name: Copy compose file
+    get_url:
+      url: '{{ compose_url }}'
+      dest: '{{ compose_dest }}'
   - name: Remove previous stack
     docker_stack:
       name: '{{ stack_name }}'
@@ -16,4 +18,4 @@
       name: '{{ stack_name }}'
       state: present
       compose:
-      - 
+      - '{{ compose_dest }}'
