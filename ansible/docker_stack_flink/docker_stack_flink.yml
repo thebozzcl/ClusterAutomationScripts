@@ -2,7 +2,7 @@
 - hosts: managers[0]
   vars:
     stack_name: flink
-    compose_url: 'https://raw.githubusercontent.com/thebozzcl/ClusterAutomationScripts/master/compose/flink/docker-compose.yml'
+    compose_url: 'https://raw.githubusercontent.com/thebozzcl/ClusterAutomationScripts/master/compose/docker_stack_flink/docker-compose.yml'
     compose_dest: '/tmp/flink_docker-compose.yml'
   tasks:
   - name: Install dependencies

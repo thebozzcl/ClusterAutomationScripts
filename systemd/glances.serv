@@ -1,0 +1,10 @@
+[Unit]
+Description = Glances web server
+After = network.target
+ 
+[Service]
+ExecStart = /usr/bin/glances -w --theme-white --process-short-name --hide-kernel-threads --fs-free-space --disable-irq --disable-raid --disable-folder --disable-swap
+ 
+[Install]
+WantedBy=multi-user.target
+EOF'

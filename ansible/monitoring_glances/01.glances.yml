@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install Glances
+    apt:
+      pkg:
+      - glances
+  - name: Start Glances on boot
