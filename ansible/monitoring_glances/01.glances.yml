@@ -1,9 +1,26 @@
 ---
 - hosts: all
   become: yes
+  vars:
+    systemd_script_url: 'https://raw.githubusercontent.com/thebozzcl/ClusterAutomationScripts/master/systemd/monitoring_glances/glances.service'
+    systemd_script_dest: '/lib/systemd/system/glances.service'
   tasks:
   - name: Install Glances
     apt:
       pkg:
       - glances
-  - name: Start Glances on boot
+  - name: Install Glances as a service
+    get_url:
+      url: '{{ systemd_script_url }}'
+      dest: '{{ systemd_script_dest }}'
+      force: yes
+  - name: Disable Glances service
+    systemd:
+      name: glances
+      enabled: no
+  - name: Start Glances service
+    systemd:
+      daemon_reload: yes
+      name: glances
+      enabled: yes
+      state: started

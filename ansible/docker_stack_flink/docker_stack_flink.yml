@@ -14,6 +14,7 @@
     get_url:
       url: '{{ compose_url }}'
       dest: '{{ compose_dest }}'
+      force: yes
   - name: Remove previous stack
     docker_stack:
       name: '{{ stack_name }}'
