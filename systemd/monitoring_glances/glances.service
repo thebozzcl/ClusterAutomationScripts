@@ -7,4 +7,3 @@ ExecStart = /usr/bin/glances -w --theme-white --process-short-name --hide-kernel
  
 [Install]
 WantedBy=multi-user.target
-EOF'
