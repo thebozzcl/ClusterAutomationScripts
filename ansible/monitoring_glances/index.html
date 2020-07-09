@@ -24,39 +24,51 @@
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
   }
-    document.getElementById("defaultOpen").click(); 
   </script>
 </head>
 <html>
   <body>
     <!-- Tab links -->
-  <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'RaspberryPi')" id="defaultOpen">Raspberry Pi</button>
-    <button class="tablinks" onclick="openTab(event, 'Jetson1')">Jetson 1</button>
-    <button class="tablinks" onclick="openTab(event, 'Jetson2')">Jetson 2</button>
-    <button class="tablinks" onclick="openTab(event, 'Jetson3')">Jetson 3</button>
-    <button class="tablinks" onclick="openTab(event, 'Jetson4')">Jetson 4</button>
-  </div>
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'RaspberryPi')" id="defaultOpen">Raspberry Pi</button>
+      <button class="tablinks" onclick="openTab(event, 'Jetson1')">Jetson 1</button>
+      <button class="tablinks" onclick="openTab(event, 'Jetson2')">Jetson 2</button>
+      <button class="tablinks" onclick="openTab(event, 'Jetson3')">Jetson 3</button>
+      <button class="tablinks" onclick="openTab(event, 'Jetson4')">Jetson 4</button>
+    </div>
 
-  <!-- Tab content -->
-  <div id="RaspberryPi" class="tabcontent iframe-container">
+    <!-- Tab content -->
+    <div id="RaspberryPi" class="tabcontent iframe-container">
       <iframe src="http://raspberrypi:61208"></iframe>
-  </div>
+    </div>
 
-  <div id="Jetson1" class="tabcontent iframe-container">
+    <div id="Jetson1" class="tabcontent iframe-container">
       <iframe src="http://jetson1:61208"></iframe>
-  </div>
+    </div>
 
-  <div id="Jetson2" class="tabcontent iframe-container">
+    <div id="Jetson2" class="tabcontent iframe-container">
       <iframe src="http://jetson2:61208"></iframe>
-  </div> 
+    </div>
 
-  <div id="Jetson3" class="tabcontent iframe-container">
+    <div id="Jetson3" class="tabcontent iframe-container">
       <iframe src="http://jetson3:61208"></iframe>
-  </div> 
+    </div>
 
-  <div id="Jetson4" class="tabcontent iframe-container">
+    <div id="Jetson4" class="tabcontent iframe-container">
       <iframe src="http://jetson4:61208"></iframe>
-  </div> 
+    </div>
+
+    <div id="Links" class="tabcontent iframe-container">
+      <ul>
+        <li><a href="https://192.168.1.1/#Dashboard">Router dashboard</a></li>
+        <li><a href="http://192.168.1.2/">NAS dashboard</a></li>
+        <li><a href="http://192.168.1.4/admin/">Pi-hole dashboard</a></li>
+        <li><a href="http://192.168.1.4:8080">Jenkins UI</a></li>
+        <li><a href="http://192.168.1.4:8081">Flink UI</a></li>
+      </ul>
+    </div>
+    <script>
+      document.getElementById("defaultOpen").click();
+    </script>
   </body>
 </html>
