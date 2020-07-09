@@ -26,6 +26,12 @@
   background-color: #ccc;
 }
 
+.iframe-container iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
 /* Style the tab content */
 .tabcontent {
   display: none;

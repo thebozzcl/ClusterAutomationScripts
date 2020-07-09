@@ -4,58 +4,59 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="style.css" />
   <script>
-  	function openTab(evt, tabName) {
-	  // Declare all variables
-	  var i, tabcontent, tablinks;
+    function openTab(evt, tabName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
 
-	  // Get all elements with class="tabcontent" and hide them
-	  tabcontent = document.getElementsByClassName("tabcontent");
-	  for (i = 0; i < tabcontent.length; i++) {
-	    tabcontent[i].style.display = "none";
-	  }
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
 
-	  // Get all elements with class="tablinks" and remove the class "active"
-	  tablinks = document.getElementsByClassName("tablinks");
-	  for (i = 0; i < tablinks.length; i++) {
-	    tablinks[i].className = tablinks[i].className.replace(" active", "");
-	  }
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
 
-	  // Show the current tab, and add an "active" class to the button that opened the tab
-	  document.getElementById(tabName).style.display = "block";
-	  evt.currentTarget.className += " active";
-	} 
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+    document.getElementById("defaultOpen").click(); 
   </script>
 </head>
 <html>
   <body>
-  	<!-- Tab links -->
-	<div class="tab">
-	  <button class="tablinks" onclick="openTab(event, 'RaspberryPi')">Raspberry Pi</button>
-	  <button class="tablinks" onclick="openTab(event, 'Jetson1')">Jetson 1</button>
-	  <button class="tablinks" onclick="openTab(event, 'Jetson2')">Jetson 2</button>
-	  <button class="tablinks" onclick="openTab(event, 'Jetson3')">Jetson 3</button>
-	  <button class="tablinks" onclick="openTab(event, 'Jetson4')">Jetson 4</button>
-	</div>
+    <!-- Tab links -->
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'RaspberryPi')" id="defaultOpen">Raspberry Pi</button>
+    <button class="tablinks" onclick="openTab(event, 'Jetson1')">Jetson 1</button>
+    <button class="tablinks" onclick="openTab(event, 'Jetson2')">Jetson 2</button>
+    <button class="tablinks" onclick="openTab(event, 'Jetson3')">Jetson 3</button>
+    <button class="tablinks" onclick="openTab(event, 'Jetson4')">Jetson 4</button>
+  </div>
 
-	<!-- Tab content -->
-	<div id="RaspberryPi" class="tabcontent">
+  <!-- Tab content -->
+  <div id="RaspberryPi" class="tabcontent iframe-container">
       <iframe src="http://raspberrypi:61208"></iframe>
-	</div>
+  </div>
 
-	<div id="Jetson1" class="tabcontent">
+  <div id="Jetson1" class="tabcontent iframe-container">
       <iframe src="http://jetson1:61208"></iframe>
-	</div>
+  </div>
 
-	<div id="Jetson2" class="tabcontent">
+  <div id="Jetson2" class="tabcontent iframe-container">
       <iframe src="http://jetson2:61208"></iframe>
-	</div> 
+  </div> 
 
-	<div id="Jetson3" class="tabcontent">
+  <div id="Jetson3" class="tabcontent iframe-container">
       <iframe src="http://jetson3:61208"></iframe>
-	</div> 
+  </div> 
 
-	<div id="Jetson4" class="tabcontent">
+  <div id="Jetson4" class="tabcontent iframe-container">
       <iframe src="http://jetson4:61208"></iframe>
-	</div> 
+  </div> 
   </body>
 </html>
