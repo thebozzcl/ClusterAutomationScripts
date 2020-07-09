@@ -1,0 +1,21 @@
+---
+- hosts: managers[0]
+  become: yes
+  vars:
+    dashboard_url: https://raw.githubusercontent.com/thebozzcl/ClusterAutomationScripts/master/ansible/monitoring_glances/index.html
+    dashboard_path: /var/www/html/glances/
+    dashboard_dest: /var/www/html/glances/index.html
+  tasks:
+  - name: Install Apache2
+    apt:
+      pkg:
+      - apache2
+  - name: Make Apache2 serve folder
+    file:
+      path: '{{ dashboard_path }}'
+      state: directory
+  - name: Download dashboard code
+    get_url:
+      url: '{{ dashboard_url }}'
+      dest: '{{ dashboard_dest }}'
+      force: yes
