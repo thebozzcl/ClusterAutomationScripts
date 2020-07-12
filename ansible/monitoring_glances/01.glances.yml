@@ -2,7 +2,7 @@
 - hosts: all
   become: yes
   vars:
-    systemd_script_url: 'https://raw.githubusercontent.com/thebozzcl/ClusterAutomationScripts/master/systemd/monitoring_glances/glances.service'
+    systemd_script_url: 'https://raw.githubusercontent.com/thebozzcl/ClusterAutomationScripts/master/ansible/monitoring_glances/glances.service'
     systemd_script_dest: '/lib/systemd/system/glances.service'
   tasks:
   - name: Install Glances
