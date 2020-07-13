@@ -3,7 +3,7 @@ Description = Glances web server
 After = network.target
  
 [Service]
-ExecStart = /usr/bin/glances -w --process-short-name --hide-kernel-threads --fs-free-space --mean-gpu
+ExecStart = /usr/bin/glances -w --process-short-name --hide-kernel-threads --fs-free-space
  
 [Install]
 WantedBy=multi-user.target
