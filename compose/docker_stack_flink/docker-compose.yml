@@ -18,6 +18,8 @@ services:
         jobmanager.rpc.address: jobmanager
         parallelism.default: 4
         taskmanager.memory.process.size: 2048m
+    volumes:
+      - /mnt/cluster_share:/cluster_share
 
   taskmanager:
     image: thebozzcl/flink:arm64v8-1.11-scala_2.12-8-jre
